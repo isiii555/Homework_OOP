@@ -1,17 +1,3 @@
-// Kechilenlerin her biri istifade olunsun
-// Initializer list, Delegate, getter setter
-
-//class : Product
-//	fields : id, name, description, price, discount
-//	methods : ShowProduct(), GetPriceWithDiscount()
-//
-//
-//	Stock{
-//	   char* name
-//	   Product *// array
-//	   Print()// show all product in Stock
-//	   Product GetProduct(int id);
-//}
 #include <iostream>
 using namespace std;
 
@@ -20,14 +6,14 @@ class Product {
 	int id;
 	char* name;
 	char* description;
-	int price;
-	int discount;
+	double price;
+	short discount;
 
 public:
 
 #pragma region Initializer list
 
-	Product() : id(0),name(nullptr),description(nullptr),price(0),discount(0) {
+	Product() : id(0), name(nullptr), description(nullptr), price(0), discount(0) {
 	}
 
 	Product(int id) : Product() {
@@ -38,15 +24,15 @@ public:
 		SetName(name);
 	}
 
-	Product(int id, const char* name, const char* description) : Product(id,name) {
+	Product(int id, const char* name, const char* description) : Product(id, name) {
 		SetDescription(description);
 	}
 
-	Product(int id, const char* name, const char* description, int price) : Product(id,name,description) {
+	Product(int id, const char* name, const char* description, double price) : Product(id, name, description) {
 		this->price = price;
 	}
 
-	Product(int id,const char* name,const char* description,int price,int discount) : Product(id,name,description,price) {
+	Product(int id, const char* name, const char* description, double price, short discount) : Product(id, name, description, price) {
 		this->discount = discount;
 	}
 
@@ -66,10 +52,14 @@ public:
 		strcpy_s(this->description, strlen(description) + 1, description);
 	}
 
-	float GetPriceWithDiscount() {
-		float tempprice;
-		tempprice = float(price) - (float(price) / discount);
+	double GetPriceWithDiscount() {
+		double tempprice;
+		tempprice = price - ((price) / discount);
 		return tempprice;
+	}
+
+	int GetId () {
+		return id;
 	}
 
 #pragma endregion
@@ -88,39 +78,41 @@ public:
 		}
 		else
 			cout << "Product Description: " << "No description" << endl;
-		cout << "Product Price: " << price << " $" <<  endl;
+		cout << "Product Price: " << price << " $" << endl;
 		cout << "Product Discount: " << discount << " %" << endl;
 	}
 };
 
 class Stock {
 	char* name;
-	Product* stock = new Product[3];
+	int ProductCount = 3;
+	Product* stock = new Product[ProductCount];
 public:
 	Stock() {
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < ProductCount; i++)
 		{
 			stock[i] = Product();
 		}
 	}
 	void Print() {
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < ProductCount; i++)
 		{
 			stock[i].ShowProduct();
 		}
 	}
 	Product GetProduct(int id) {
-		if (id > 2) {
-			cout << "No product found for this id number";
+		for (int i = 0; i < ProductCount; i++) {
+			if (stock[i].GetId() == id) {
+				return stock[i];
+			}
+			else
+				cout << "There is no product with this id";
 		}
-		else
-			return stock[id];
 	}
 };
 
 int main() {
+	Product Apple(1,"Apple","Fruit",23.5,10);
 	Stock Fruits;
-
-	Product Fruit = Fruits.GetProduct(1);
-	Fruit.ShowProduct();
+	Fruits.GetProduct(1).ShowProduct();
 }
