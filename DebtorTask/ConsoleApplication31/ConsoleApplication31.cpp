@@ -63,16 +63,6 @@ public:
 		SetLiveAdress(other.liveAdress);
 		debt = other.debt;
 	}
-
-	~Debtor()
-	{
-		delete[] name;
-		delete[] surname;
-		delete[] workAdress;
-		delete[] phoneNumber;
-		delete[] liveAdress;
-	}
-
 #pragma endregion
 
 #pragma region Setters&Getters

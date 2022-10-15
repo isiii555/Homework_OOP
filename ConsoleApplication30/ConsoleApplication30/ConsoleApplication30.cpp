@@ -58,7 +58,7 @@ public:
 		return tempprice;
 	}
 
-	int GetId () {
+	int GetId() {
 		return id;
 	}
 
@@ -86,7 +86,11 @@ public:
 class Stock {
 	char* name;
 	int ProductCount = 3;
-	Product* stock = new Product[ProductCount];
+	Product* stock = new Product[ProductCount]{
+		{1, "apple" , "Fruit", 23.5, 10},
+		{2, "banana" , "Fruit", 15, 5},
+		{3, "grape" , "Fruit", 40, 10}
+	};
 public:
 	Stock() {
 		for (int i = 0; i < ProductCount; i++)
@@ -112,7 +116,6 @@ public:
 };
 
 int main() {
-	Product Apple(1,"Apple","Fruit",23.5,10);
-	Stock Fruits;
-	Fruits.GetProduct(1).ShowProduct();
+	Stock fruits;
+	fruits.Print();
 }
