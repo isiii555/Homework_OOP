@@ -1,0 +1,8 @@
+﻿  ConsoleApplication33.cpp
+C:\Users\user\source\repos\ConsoleApplication33\ConsoleApplication33\ConsoleApplication33.cpp(87,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\user\source\repos\ConsoleApplication33\ConsoleApplication33\ConsoleApplication33.cpp(94,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\user\source\repos\ConsoleApplication33\ConsoleApplication33\ConsoleApplication33.cpp(101,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\user\source\repos\ConsoleApplication33\ConsoleApplication33\ConsoleApplication33.cpp(108,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\user\source\repos\ConsoleApplication33\ConsoleApplication33\ConsoleApplication33.cpp(232,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\user\source\repos\ConsoleApplication33\ConsoleApplication33\ConsoleApplication33.cpp(239,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  ConsoleApplication33.vcxproj -> C:\Users\user\source\repos\ConsoleApplication33\x64\Debug\ConsoleApplication33.exe
