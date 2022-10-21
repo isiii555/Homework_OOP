@@ -108,14 +108,14 @@ public:
 	friend ostream& operator<<(ostream& out, const Computer& obj) {
 		out << "=============== Computer Info ===============\n"
 			<< "ObjectId:" << obj.objectId
-			<< "Vendor: " << obj.vendor
+			<< "\nVendor: " << obj.vendor
 			<< "\nModel: " << obj.model
 			<< "\nMonitor: " << obj.monitor
 			<< "\nCpu-Hz: " << obj.cpu_Hz
 			<< "\nCore: " << obj.core
 			<< "\nRam: " << obj.ram
 			<< "\nDiskSize: " << obj.disk_size
-			<< "\nSSD: " << boolalpha << obj.isSSD;
+			<< "\nSSD: " << obj.isSSD;
 		return out;
 	}
 
@@ -160,7 +160,7 @@ public:
 		cout << "is SSD ? (1 = Yes, 0 = No) : ";
 		int i;
 		cin >> i;
-		obj.SetDiskSize(i);
+		obj.SetIsSsd(i);
 
 		delete[] bf;
 		return in;
@@ -190,9 +190,13 @@ public:
 
 	~ComputerStore()
 	{
+		for (int i = 0; i < size; i++)
+		{
+			delete computers[i];
+		}
 		delete[] storeName;
 		delete[] storeAdress;
-		delete computers;
+		delete[] computers;
 	}
 
 #pragma endregion
@@ -219,7 +223,7 @@ public:
 
 	void AddComputer(Computer& obj) {
 
-		Computer** temp = new Computer*[size + 1];
+		Computer** temp = new Computer * [size + 1];
 		for (int i = 0; i < size; i++)
 		{
 			temp[i] = computers[i];
