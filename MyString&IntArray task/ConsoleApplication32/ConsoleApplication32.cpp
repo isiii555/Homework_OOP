@@ -1,127 +1,6 @@
 #include <iostream>
 using namespace std;
 
-// Task 1
-
-//class MyString {
-//
-//#pragma region Fields
-//
-//
-//	char* string = nullptr;
-//
-//	int GetSize(const char* str) {
-//		int size = 0;
-//		for (int i = 0; str[i] != '\0'; i++)
-//		{
-//			size++;
-//		}
-//		return size;
-//	}
-//#pragma endregion
-//
-//public:
-//
-//#pragma region Constructors
-//
-//
-//	MyString() = default;
-//
-//	MyString(const char* str) {
-//		SetString(str);
-//	}
-//
-//#pragma endregion
-//
-//#pragma region Setter&Getter
-//
-//	void SetString(const char* str) {
-//		delete[] string;
-//		int len = strlen(str) + 1;
-//		string = new char[len];
-//		strcpy_s(string, len, str);
-//	}
-//
-//	const char* GetString() const {
-//		return string;
-//	}
-//
-//
-//#pragma endregion
-//
-//#pragma region Methods
-//
-//	char FirstChar() const {
-//		return string[0];
-//	}
-//
-//	char LastChar() const {
-//		int size = 0;
-//		for (int i = 0; string[i] != '\0'; i++)
-//		{
-//			size++;
-//		}
-//		return string[size - 1];
-//	}
-//
-//	void Append(const char* s){
-//		if (string != nullptr)
-//		{
-//			int size = GetSize(string);
-//			int sizes = GetSize(s);
-//			char* temp = new char[size + sizes];
-//			for (int i = 0; i < size; i++)
-//			{
-//				temp[i] = string[i];
-//			}
-//			int j = 0;
-//			for (int i = size; i < size + sizes; i++)
-//			{
-//				temp[i] = s[j];
-//				j++;
-//			}
-//			temp[size + sizes] = '\0';
-//			SetString(temp);
-//		}
-//		else{
-//			SetString(s);
-//		}
-//	}
-//
-//	int rFind(const char s) {
-//		int size = GetSize(string) - 1;
-//		int j = 0;
-//		for (int i = size; i >= 0; i--)
-//		{
-//			if (s == string[i]) {
-//				return j;
-//			}
-//			j++;
-//		}
-//	}
-//
-//	int Find(const char s) {
-//		int size = GetSize(string) - 1;
-//		for (int i = 0; i <= size; i++)
-//		{
-//			if (s == string[i]) {
-//				return i;
-//			}
-//		}
-//	}
-//
-//	void Clear() {
-//		delete[] string;
-//	}
-//
-//#pragma endregion
-//
-//
-//};
-//
-//
-//Task 1
-
 class MyString {
 
 #pragma region Fields
@@ -242,7 +121,7 @@ public:
 //int main() {
 //	MyString o;
 //	o.Append("mandarin");
-@@ -131,76 +131,80 @@ using namespace std;
+//}
 
 // Task 2
 
