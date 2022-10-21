@@ -6,10 +6,10 @@ class ComputerStore;
 class Computer {
 
 	int objectId;
-	char* model;
-	char* vendor;
-	char* videoCard;
-	char* monitor;
+	char* model = nullptr;
+	char* vendor = nullptr;
+	char* videoCard = nullptr;
+	char* monitor = nullptr;
 	double cpu_Hz = 0;
 	int core = 0;
 	int ram = 0;
@@ -39,6 +39,21 @@ public:
 		SetRam(r);
 		SetDiskSize(ds);
 		SetIsSsd(isS);
+
+	}
+
+	Computer(const Computer& other) {
+
+		objectId = other.objectId;
+		SetModel(other.model);
+		SetVendor(other.vendor);
+		SetVideoCard(other.videoCard);
+		SetMonitor(other.monitor);
+		SetCore(other.core);
+		SetCpuHz(other.cpu_Hz);
+		SetRam(other.ram);
+		SetDiskSize(other.disk_size);
+		SetIsSsd(other.isSSD);
 
 	}
 
@@ -115,7 +130,7 @@ public:
 			<< "\nCore: " << obj.core
 			<< "\nRam: " << obj.ram
 			<< "\nDiskSize: " << obj.disk_size
-			<< "\nSSD: " << obj.isSSD;
+			<< "\nSSD: " << obj.isSSD << "\n";
 		return out;
 	}
 
@@ -173,10 +188,10 @@ public:
 int Computer::StaticId = 0;
 
 class ComputerStore {
-	char* storeName;
-	char* storeAdress;
+	char* storeName = nullptr;
+	char* storeAdress = nullptr;
 	int size = 0;
-	Computer** computers = new Computer * [size];
+	Computer** computers = nullptr;
 public:
 
 #pragma region Constructors&Destructors
@@ -237,37 +252,41 @@ public:
 	}
 
 	void DeleteComputer(int id) {
-		int index = -1;
 		for (int i = 0; i < size; i++)
 		{
 			if (id == computers[i]->objectId)
 			{
-				index = i;
-				break;
+				Computer** temp = new Computer * [size - 1];
+				for (int j = 0; j < i; j++)
+				{
+					temp[j] = computers[j];
+				}
+				for (int j = i; j < size - 1; j++)
+				{
+					temp[j + 1] = computers[i + 1];
+				}
+				size--;
+				delete computers;
+				computers = temp;
 			}
-		}
-		if (index != -1 && 0 < size) {
-			Computer** temp = new Computer * [size - 1];
-			for (int i = 0; i < index; i++)
-			{
-				temp[i] = computers[i];
-
-			}
-			for (int i = index; i < size; i++)
-			{
-				temp[i] = computers[i + 1];
-			}
-			delete[] computers;
-			computers = temp;
-			temp = nullptr;
-			size--;
 		}
 	}
+
 	void PrintComputers() {
 		for (int i = 0; i < size; i++)
 		{
 			cout << *computers[i];
 		}
+	}
+
+	friend ostream& operator<<(ostream& out, const ComputerStore& obj) {
+		out << obj.storeName << endl;
+		out << obj.storeAdress << endl;
+		for (int i = 0; i < obj.size; i++) {
+			cout << *obj.computers[i];
+		}
+		cout << "\n\n";
+		return out;
 	}
 
 #pragma endregion
@@ -276,8 +295,9 @@ public:
 
 int main() {
 	Computer hp;
+	Computer hp2("hp","hp","hp","hp",1,1,1,1,1);
 	ComputerStore Kontakt;
 	cin >> hp;
 	Kontakt.AddComputer(hp);
-	Kontakt.PrintComputers();
+	Kontakt.AddComputer(hp2);
 }
