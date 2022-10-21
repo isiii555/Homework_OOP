@@ -1,0 +1,4 @@
+﻿  ConsoleApplication34.cpp
+C:\Users\user\source\repos\ConsoleApplication34\ConsoleApplication34\ConsoleApplication34.cpp(123): warning C4715: 'Database::SignUp': not all control paths return a value
+C:\Users\user\source\repos\ConsoleApplication34\ConsoleApplication34\ConsoleApplication34.cpp(85): warning C4715: 'Database::SignIn': not all control paths return a value
+  ConsoleApplication34.vcxproj -> C:\Users\user\source\repos\ConsoleApplication34\x64\Debug\ConsoleApplication34.exe
