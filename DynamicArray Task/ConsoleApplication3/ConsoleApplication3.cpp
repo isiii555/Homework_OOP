@@ -1,4 +1,5 @@
 #include <iostream>
+#include <assert.h>
 using namespace std;
 
 template <class T>
@@ -15,7 +16,7 @@ public:
 		delete[] dynamicArray;
 		size = oth.size;
 		dynamicArray = new T[size];
-		for (int i = 0; i < size ; i++)
+		for (int i = 0; i < size; i++)
 		{
 			dynamicArray[i] = oth.dynamicArray[i];
 		}
@@ -41,6 +42,7 @@ public:
 	}
 
 	T& operator[](int index) {
+		assert(0 <= index && index < size && "index out of range");
 		return dynamicArray[index];
 	}
 
@@ -68,7 +70,7 @@ public:
 		temp[0] = elem;
 		for (int i = 0; i < size; i++)
 		{
-			temp[i+1] = dynamicArray[i];
+			temp[i + 1] = dynamicArray[i];
 		}
 		delete[] dynamicArray;
 		dynamicArray = temp;
@@ -77,7 +79,7 @@ public:
 
 	}
 
-	void AddElementByIndex(int index,T elem) {
+	void AddElementByIndex(int index, T elem) {
 
 		T* temp = new T[size + 1];
 		for (int i = 0; i < index; i++)
@@ -87,7 +89,7 @@ public:
 		temp[index] = elem;
 		for (int i = index; i < size; i++)
 		{
-			temp[i+1] = dynamicArray[i];
+			temp[i + 1] = dynamicArray[i];
 		}
 		delete[] dynamicArray;
 		dynamicArray = temp;
@@ -98,14 +100,14 @@ public:
 
 	void DeleteElementByIndex(int index) {
 
-		T* temp = new T[size-1];
+		T* temp = new T[size - 1];
 		for (int i = 0; i < index; i++)
 		{
 			temp[i] = dynamicArray[i];
 		}
-		for (int i = index+1; i < size; i++)
+		for (int i = index + 1; i < size; i++)
 		{
-			temp[i-1] = dynamicArray[i];
+			temp[i - 1] = dynamicArray[i];
 		}
 		delete[] dynamicArray;
 		dynamicArray = temp;
@@ -135,10 +137,6 @@ int main() {
 	arr.AddElementToEnd(3);
 	arr.AddElementToEnd(2);
 	arr.AddElementByIndex(2, 5);
-	arr2 = arr;
-	arr.Print();
-	cout << endl;
-	arr2.Print();
-
+	cout << arr[5];
 
 }
