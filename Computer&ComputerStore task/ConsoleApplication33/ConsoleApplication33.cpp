@@ -1,31 +1,3 @@
-//class : Computer
-//	fields :
-//id(static)
-//object_Id
-//model(char*)
-//vendor(char*)
-//videocard(char*)
-//monitor(char*)
-//cpu_hz
-//core
-//ram
-//disk_size
-//isSSD(bool)
-//cin, cout overload
-//constructors
-//destructor
-//
-//
-//class : ComputerStore
-//	store_name(char*)
-//	store_address(char*)
-//	Computer** computers; (array)
-//	addComputer();
-//deleteComputer(int id);
-//cin, cout overload
-//constructors
-//destructor
-
 #include <iostream>
 using namespace std;
 
@@ -34,10 +6,10 @@ class ComputerStore;
 class Computer {
 
 	int objectId;
-	char* model;
-	char* vendor;
-	char* videoCard;
-	char* monitor;
+	char* model = nullptr;
+	char* vendor = nullptr;
+	char* videoCard = nullptr;
+	char* monitor = nullptr;
 	double cpu_Hz = 0;
 	int core = 0;
 	int ram = 0;
@@ -67,6 +39,21 @@ public:
 		SetRam(r);
 		SetDiskSize(ds);
 		SetIsSsd(isS);
+
+	}
+
+	Computer(const Computer& other) {
+
+		objectId = other.objectId;
+		SetModel(other.model);
+		SetVendor(other.vendor);
+		SetVideoCard(other.videoCard);
+		SetMonitor(other.monitor);
+		SetCore(other.core);
+		SetCpuHz(other.cpu_Hz);
+		SetRam(other.ram);
+		SetDiskSize(other.disk_size);
+		SetIsSsd(other.isSSD);
 
 	}
 
@@ -120,11 +107,11 @@ public:
 	void SetRam(int r) {
 		ram = r;
 	}
-	
+
 	void SetDiskSize(int ds) {
 		disk_size = ds;
 	}
-	
+
 	void SetIsSsd(bool isS) {
 		isSSD = isS;
 	}
@@ -136,14 +123,14 @@ public:
 	friend ostream& operator<<(ostream& out, const Computer& obj) {
 		out << "=============== Computer Info ===============\n"
 			<< "ObjectId:" << obj.objectId
-			<< "Vendor: " << obj.vendor
+			<< "\nVendor: " << obj.vendor
 			<< "\nModel: " << obj.model
 			<< "\nMonitor: " << obj.monitor
 			<< "\nCpu-Hz: " << obj.cpu_Hz
 			<< "\nCore: " << obj.core
 			<< "\nRam: " << obj.ram
 			<< "\nDiskSize: " << obj.disk_size
-			<< "\nSSD: " << boolalpha << obj.isSSD;
+			<< "\nSSD: " << obj.isSSD << "\n";
 		return out;
 	}
 
@@ -188,7 +175,7 @@ public:
 		cout << "is SSD ? (1 = Yes, 0 = No) : ";
 		int i;
 		cin >> i;
-		obj.SetDiskSize(i);
+		obj.SetIsSsd(i);
 
 		delete[] bf;
 		return in;
@@ -201,26 +188,30 @@ public:
 int Computer::StaticId = 0;
 
 class ComputerStore {
-	char* storeName;
-	char* storeAdress;
+	char* storeName = nullptr;
+	char* storeAdress = nullptr;
 	int size = 0;
-	Computer** computers = new Computer*[size];
+	Computer** computers = nullptr;
 public:
 
 #pragma region Constructors&Destructors
 
 	ComputerStore() = default;
 
-	ComputerStore(const char* name,const char* adress) {
+	ComputerStore(const char* name, const char* adress) {
 		SetName(name);
 		SetAdress(adress);
 	}
-	
+
 	~ComputerStore()
 	{
+		for (int i = 0; i < size; i++)
+		{
+			delete computers[i];
+		}
 		delete[] storeName;
 		delete[] storeAdress;
-		delete computers;
+		delete[] computers;
 	}
 
 #pragma endregion
@@ -245,15 +236,18 @@ public:
 
 #pragma region Methods
 
-	void AddComputer() {
-		
-		Computer** temp = new Computer * [size+1];
-		temp[size] = new Computer();
-		cin >> *temp[size];
-		size++;
+	void AddComputer(Computer& obj) {
+
+		Computer** temp = new Computer * [size + 1];
+		for (int i = 0; i < size; i++)
+		{
+			temp[i] = computers[i];
+		}
+		temp[size] = new Computer(obj);
 		delete computers;
 		computers = temp;
-		cout << "Computer Added" << endl;
+		temp = nullptr;
+		size++;
 
 	}
 
@@ -269,7 +263,7 @@ public:
 				}
 				for (int j = i; j < size - 1; j++)
 				{
-					temp[j+1] = computers[i+1];
+					temp[j + 1] = computers[i + 1];
 				}
 				size--;
 				delete computers;
@@ -285,13 +279,25 @@ public:
 		}
 	}
 
+	friend ostream& operator<<(ostream& out, const ComputerStore& obj) {
+		out << obj.storeName << endl;
+		out << obj.storeAdress << endl;
+		for (int i = 0; i < obj.size; i++) {
+			cout << *obj.computers[i];
+		}
+		cout << "\n\n";
+		return out;
+	}
+
 #pragma endregion
 
 };
 
 int main() {
+	Computer hp;
+	Computer hp2("hp","hp","hp","hp",1,1,1,1,1);
 	ComputerStore Kontakt;
-	Kontakt.AddComputer();
-	Kontakt.DeleteComputer(1);
-	Kontakt.PrintComputers();
+	cin >> hp;
+	Kontakt.AddComputer(hp);
+	Kontakt.AddComputer(hp2);
 }
