@@ -237,26 +237,32 @@ public:
 	}
 
 	void DeleteComputer(int id) {
+		int index = -1;
 		for (int i = 0; i < size; i++)
 		{
 			if (id == computers[i]->objectId)
 			{
-				Computer** temp = new Computer * [size - 1];
-				for (int j = 0; j < i; j++)
-				{
-					temp[j] = computers[j];
-				}
-				for (int j = i; j < size - 1; j++)
-				{
-					temp[j + 1] = computers[i + 1];
-				}
-				size--;
-				delete computers;
-				computers = temp;
+				index = i;
+				break;
 			}
 		}
-	}
+		if (index != -1 && 0 < size) {
+			Computer** temp = new Computer * [size - 1];
+			for (int i = 0; i < index; i++)
+			{
+				temp[i] = computers[i];
 
+			}
+			for (int i = index; i < size; i++)
+			{
+				temp[i] = computers[i + 1];
+			}
+			delete[] computers;
+			computers = temp;
+			temp = nullptr;
+			size--;
+		}
+	}
 	void PrintComputers() {
 		for (int i = 0; i < size; i++)
 		{
