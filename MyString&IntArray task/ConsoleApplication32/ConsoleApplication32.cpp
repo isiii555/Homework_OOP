@@ -1,262 +1,383 @@
 #include <iostream>
 using namespace std;
 
-class ComputerStore;
+// Task 1
 
-class Computer {
+//class MyString {
+//
+//#pragma region Fields
+//
+//
+//	char* string = nullptr;
+//
+//	int GetSize(const char* str) {
+//		int size = 0;
+//		for (int i = 0; str[i] != '\0'; i++)
+//		{
+//			size++;
+//		}
+//		return size;
+//	}
+//#pragma endregion
+//
+//public:
+//
+//#pragma region Constructors
+//
+//
+//	MyString() = default;
+//
+//	MyString(const char* str) {
+//		SetString(str);
+//	}
+//
+//#pragma endregion
+//
+//#pragma region Setter&Getter
+//
+//	void SetString(const char* str) {
+//		delete[] string;
+//		int len = strlen(str) + 1;
+//		string = new char[len];
+//		strcpy_s(string, len, str);
+//	}
+//
+//	const char* GetString() const {
+//		return string;
+//	}
+//
+//
+//#pragma endregion
+//
+//#pragma region Methods
+//
+//	char FirstChar() const {
+//		return string[0];
+//	}
+//
+//	char LastChar() const {
+//		int size = 0;
+//		for (int i = 0; string[i] != '\0'; i++)
+//		{
+//			size++;
+//		}
+//		return string[size - 1];
+//	}
+//
+//	void Append(const char* s){
+//		if (string != nullptr)
+//		{
+//			int size = GetSize(string);
+//			int sizes = GetSize(s);
+//			char* temp = new char[size + sizes];
+//			for (int i = 0; i < size; i++)
+//			{
+//				temp[i] = string[i];
+//			}
+//			int j = 0;
+//			for (int i = size; i < size + sizes; i++)
+//			{
+//				temp[i] = s[j];
+//				j++;
+//			}
+//			temp[size + sizes] = '\0';
+//			SetString(temp);
+//		}
+//		else{
+//			SetString(s);
+//		}
+//	}
+//
+//	int rFind(const char s) {
+//		int size = GetSize(string) - 1;
+//		int j = 0;
+//		for (int i = size; i >= 0; i--)
+//		{
+//			if (s == string[i]) {
+//				return j;
+//			}
+//			j++;
+//		}
+//	}
+//
+//	int Find(const char s) {
+//		int size = GetSize(string) - 1;
+//		for (int i = 0; i <= size; i++)
+//		{
+//			if (s == string[i]) {
+//				return i;
+//			}
+//		}
+//	}
+//
+//	void Clear() {
+//		delete[] string;
+//	}
+//
+//#pragma endregion
+//
+//
+//};
+//
+//
+//Task 1
 
-	int objectId;
-	char* model;
-	char* vendor;
-	char* videoCard;
-	char* monitor;
-	double cpu_Hz = 0;
-	int core = 0;
-	int ram = 0;
-	int disk_size = 0;
-	bool isSSD = true;
-	static int StaticId;
+class MyString {
 
-public:
-	friend class ComputerStore;
-
-#pragma region Constructors&Destructor
+#pragma region Fields
 
 
-	Computer() {
-		objectId = ++StaticId;
-	}
+	char* string = nullptr;
 
-	Computer(const char* m, const char* v, const char* vc, const char* mon, double cHz, int c, int r, int ds, bool isS) {
-
-		objectId = ++StaticId;
-		SetModel(m);
-		SetVendor(v);
-		SetVideoCard(vc);
-		SetMonitor(mon);
-		SetCore(c);
-		SetCpuHz(cHz);
-		SetRam(r);
-		SetDiskSize(ds);
-		SetIsSsd(isS);
-
-	}
-
-	~Computer()
-	{
-		delete[] model;
-		delete[] vendor;
-		delete[] monitor;
-		delete[] videoCard;
-	}
-
-#pragma endregion
-
-#pragma region Setters&Getters
-
-	void SetModel(const char* m) {
-		delete[] model;
-		int len = strlen(m) + 1;
-		model = new char[len];
-		strcpy_s(model, len, m);
-	}
-
-	void SetVendor(const char* v) {
-		delete[] vendor;
-		int len = strlen(v) + 1;
-		vendor = new char[len];
-		strcpy_s(vendor, len, v);
-	}
-
-	void SetVideoCard(const char* vc) {
-		delete[] videoCard;
-		int len = strlen(vc) + 1;
-		videoCard = new char[len];
-		strcpy_s(videoCard, len, vc);
-	}
-
-	void SetMonitor(const char* mon) {
-		delete[] monitor;
-		int len = strlen(mon) + 1;
-		monitor = new char[len];
-		strcpy_s(monitor, len, mon);
-	}
-	void SetCpuHz(double cHz) {
-		cpu_Hz = cHz;
-	}
-
-	void SetCore(int c) {
-		core = c;
-	}
-
-	void SetRam(int r) {
-		ram = r;
-	}
-
-	void SetDiskSize(int ds) {
-		disk_size = ds;
-	}
-
-	void SetIsSsd(bool isS) {
-		isSSD = isS;
-	}
-
-#pragma endregion
-
-#pragma region Methods
-
-	friend ostream& operator<<(ostream& out, const Computer& obj) {
-		out << "=============== Computer Info ===============\n"
-			<< "ObjectId:" << obj.objectId
-			<< "Vendor: " << obj.vendor
-			<< "\nModel: " << obj.model
-			<< "\nMonitor: " << obj.monitor
-			<< "\nCpu-Hz: " << obj.cpu_Hz
-			<< "\nCore: " << obj.core
-			<< "\nRam: " << obj.ram
-			<< "\nDiskSize: " << obj.disk_size
-			<< "\nSSD: " << boolalpha << obj.isSSD;
-		return out;
-	}
-
-	friend istream& operator>>(istream& in, Computer& obj) {
-		char* bf = new char[40];
-		cout << "Model: ";
-		in.getline(bf, 40);
-		obj.SetModel(bf);
-
-		cout << "Vendor: ";
-		in.getline(bf, 40);
-		obj.SetVendor(bf);
-
-		cout << "Videocard: ";
-		in.getline(bf, 40);
-		obj.SetVideoCard(bf);
-
-		cout << "Monitor: ";
-		in.getline(bf, 40);
-		obj.SetMonitor(bf);
-
-		cout << "Cpu-Hz: ";
-		double y;
-		cin >> y;
-		obj.SetCpuHz(y);
-
-		cout << "Core: ";
-		int c;
-		cin >> c;
-		obj.SetCore(c);
-
-		cout << "Ram: ";
-		int r;
-		cin >> r;
-		obj.SetRam(r);
-
-		cout << "Disc Size: ";
-		int d;
-		cin >> d;
-		obj.SetDiskSize(d);
-
-		cout << "is SSD ? (1 = Yes, 0 = No) : ";
-		int i;
-		cin >> i;
-		obj.SetDiskSize(i);
-
-		delete[] bf;
-		return in;
-	}
-
-#pragma endregion
-
-};
-
-int Computer::StaticId = 0;
-
-class ComputerStore {
-	char* storeName;
-	char* storeAdress;
-	int size = 0;
-	Computer** computers = new Computer * [size];
-public:
-
-#pragma region Constructors&Destructors
-
-	ComputerStore() = default;
-
-	ComputerStore(const char* name, const char* adress) {
-		SetName(name);
-		SetAdress(adress);
-	}
-
-	~ComputerStore()
-	{
-		delete[] storeName;
-		delete[] storeAdress;
-		delete computers;
-	}
-
-#pragma endregion
-
-#pragma region Setters&Getters
-
-	void SetName(const char* name) {
-		delete[] storeName;
-		int len = strlen(name) + 1;
-		storeName = new char[len];
-		strcpy_s(storeName, len, name);
-	}
-
-	void SetAdress(const char* adress) {
-		delete[] storeAdress;
-		int len = strlen(adress) + 1;
-		storeAdress = new char[len];
-		strcpy_s(storeAdress, len, adress);
-	}
-
-#pragma endregion
-
-#pragma region Methods
-
-	void AddComputer(Computer& obj) {
-
-		Computer** temp = new Computer*[size + 1];
-		for (int i = 0; i < size; i++)
+	int GetSize(const char* str) {
+		int size = 0;
+		for (int i = 0; str[i] != '\0'; i++)
 		{
-			temp[i] = computers[i];
+			size++;
 		}
-		temp[size] = new Computer(obj);
-		delete computers;
-		computers = temp;
-		temp = nullptr;
-		size++;
+		return size;
+	}
+#pragma endregion
 
+public:
+
+#pragma region Constructors
+
+
+	MyString() = default;
+
+	MyString(const char* str) {
+		SetString(str);
 	}
 
-	void DeleteComputer(int id) {
-		for (int i = 0; i < size; i++)
+#pragma endregion
+
+#pragma region Setter&Getter
+
+	void SetString(const char* str) {
+		delete[] string;
+		int len = strlen(str) + 1;
+		string = new char[len];
+		strcpy_s(string, len, str);
+	}
+
+	const char* GetString() const {
+		return string;
+	}
+
+
+#pragma endregion
+
+#pragma region Methods
+
+	char FirstChar() const {
+		return string[0];
+	}
+
+	char LastChar() const {
+		int size = 0;
+		for (int i = 0; string[i] != '\0'; i++)
 		{
-			if (id == computers[i]->objectId)
+			size++;
+		}
+		return string[size - 1];
+	}
+
+	void Append(const char* s){
+		if (string != nullptr)
+		{
+			int size = GetSize(string);
+			int sizes = GetSize(s);
+			char* temp = new char[size + sizes];
+			for (int i = 0; i < size; i++)
 			{
-				Computer** temp = new Computer * [size - 1];
-				for (int j = 0; j < i; j++)
-				{
-					temp[j] = computers[j];
-				}
-				for (int j = i; j < size - 1; j++)
-				{
-					temp[j + 1] = computers[i + 1];
-				}
-				size--;
-				delete computers;
-				computers = temp;
+				temp[i] = string[i];
+			}
+			int j = 0;
+			for (int i = size; i < size + sizes; i++)
+			{
+				temp[i] = s[j];
+				j++;
+			}
+			temp[size + sizes] = '\0';
+			SetString(temp);
+		}
+		else{
+			SetString(s);
+		}
+	}
+
+	int rFind(const char s) {
+		int size = GetSize(string) - 1;
+		int j = 0;
+		for (int i = size; i >= 0; i--)
+		{
+			if (s == string[i]) {
+				return j;
+			}
+			j++;
+		}
+	}
+
+	int Find(const char s) {
+		int size = GetSize(string) - 1;
+		for (int i = 0; i <= size; i++)
+		{
+			if (s == string[i]) {
+				return i;
 			}
 		}
 	}
 
-	void PrintComputers() {
+	void Clear() {
+		delete[] string;
+	}
+
+#pragma endregion
+
+
+};
+
+
+//int main() {
+//	MyString o;
+//	o.Append("mandarin");
+@@ -131,76 +131,80 @@ using namespace std;
+
+// Task 2
+
+//class IntArray {
+//	int size = 5;
+//	int* arr = new int[size]{1,2,3,4,5};
+//public:
+//
+//#pragma region Constructors
+//
+//	IntArray() = default;
+//
+//	IntArray(int s)
+//	{
+//		size = s;
+//		arr = new int[s]{};
+//	}
+//
+//	IntArray(const IntArray& obj)
+//	{
+//		delete[] arr;
+//		size = obj.size;
+//		arr = new int[size]{};
+//		for (int i = 0; i < size; i++) {
+//			arr[i] = obj.arr[i];
+//		}
+//	}
+//	
+//#pragma endregion
+//
+//#pragma region Methods
+//
+//	void AppendBefore(int num) {
+//		int* temp = new int[size++]{};
+//		temp[0] = num;
+//		for (int i = 1; i < size; i++)
+//		{
+//			temp[i] = arr[i - 1];
+//		}
+//		/*delete[] arr;*/
+//		arr = temp;
+//	}
+//
+//	void AppendAfter(int num) {
+//		int* temp = new int[size+1]{};
+//		for (int i = 0; i < size; i++)
+//		{
+//			temp[i] = arr[i];
+//		}
+//		temp[size] = num;
+//		size++;
+//	/*	delete[] arr;*/
+//		arr = temp;
+//	}
+//
+//	void Print() {
+//		for (int i = 0; i < size; i++)
+//		{
+//			cout << arr[i] << " ";
+//		}
+//	}
+//
+//#pragma endregion
+//
+//};
+//
+//int main() {
+//	IntArray arr;
+//	arr.AppendBefore(1);
+//	arr.AppendBefore(2);
+//	IntArray arr2 = arr;
+//	arr.AppendBefore(1);
+//	arr.Print();
+//	cout << endl;
+//	arr2.Print();
+//}
+class IntArray {
+	int size = 5;
+	int* arr = new int[size]{1,2,3,4,5};
+public:
+
+#pragma region Constructors
+
+	IntArray() = default;
+
+	IntArray(int s)
+	{
+		size = s;
+		arr = new int[s]{};
+	}
+
+	IntArray(const IntArray& obj)
+	{
+		delete[] arr;
+		size = obj.size;
+		arr = new int[size]{};
+		for (int i = 0; i < size; i++) {
+			arr[i] = obj.arr[i];
+		}
+	}
+
+#pragma endregion
+
+#pragma region Methods
+
+	void AppendBefore(int num) {
+		int* temp = new int[size+1]{};
+		temp[0] = num;
+		for (int i = 0; i <= size; i++)
+		{
+			temp[i+1] = arr[i];
+		}
+		delete[] arr;
+		arr = temp;
+		temp = nullptr;
+		size++;
+	}
+
+	void AppendAfter(int num) {
+		int* temp = new int[size+1]{};
 		for (int i = 0; i < size; i++)
 		{
-			cout << *computers[i];
+			temp[i] = arr[i];
+		}
+		temp[size] = num;
+	    delete[] arr;
+		arr = temp;
+		temp = nullptr;
+		size++;
+	}
+
+	void Print() {
+		for (int i = 0; i < size; i++)
+		{
+			cout << arr[i] << " ";
 		}
 	}
 
@@ -264,10 +385,13 @@ public:
 
 };
 
-int main() {
-	Computer hp;
-	ComputerStore Kontakt;
-	cin >> hp;
-	Kontakt.AddComputer(hp);
-	Kontakt.PrintComputers();
+void main () {
+	IntArray arr;
+	/*arr.AppendBefore(1);
+	arr.AppendBefore(2);
+	arr.AppendBefore(1);*/
+	arr.AppendBefore(1);
+	arr.AppendBefore(2);
+	arr.AppendBefore(3);
+	arr.Print();
 }
