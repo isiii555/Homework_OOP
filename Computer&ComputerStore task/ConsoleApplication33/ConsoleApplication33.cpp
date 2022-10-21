@@ -1,31 +1,3 @@
-//class : Computer
-//	fields :
-//id(static)
-//object_Id
-//model(char*)
-//vendor(char*)
-//videocard(char*)
-//monitor(char*)
-//cpu_hz
-//core
-//ram
-//disk_size
-//isSSD(bool)
-//cin, cout overload
-//constructors
-//destructor
-//
-//
-//class : ComputerStore
-//	store_name(char*)
-//	store_address(char*)
-//	Computer** computers; (array)
-//	addComputer();
-//deleteComputer(int id);
-//cin, cout overload
-//constructors
-//destructor
-
 #include <iostream>
 using namespace std;
 
@@ -120,11 +92,11 @@ public:
 	void SetRam(int r) {
 		ram = r;
 	}
-	
+
 	void SetDiskSize(int ds) {
 		disk_size = ds;
 	}
-	
+
 	void SetIsSsd(bool isS) {
 		isSSD = isS;
 	}
@@ -204,18 +176,18 @@ class ComputerStore {
 	char* storeName;
 	char* storeAdress;
 	int size = 0;
-	Computer** computers = new Computer*[size];
+	Computer** computers = new Computer * [size];
 public:
 
 #pragma region Constructors&Destructors
 
 	ComputerStore() = default;
 
-	ComputerStore(const char* name,const char* adress) {
+	ComputerStore(const char* name, const char* adress) {
 		SetName(name);
 		SetAdress(adress);
 	}
-	
+
 	~ComputerStore()
 	{
 		delete[] storeName;
@@ -245,15 +217,18 @@ public:
 
 #pragma region Methods
 
-	void AddComputer() {
-		
-		Computer** temp = new Computer * [size+1];
-		temp[size] = new Computer();
-		cin >> *temp[size];
-		size++;
+	void AddComputer(Computer& obj) {
+
+		Computer** temp = new Computer*[size + 1];
+		for (int i = 0; i < size; i++)
+		{
+			temp[i] = computers[i];
+		}
+		temp[size] = new Computer(obj);
 		delete computers;
 		computers = temp;
-		cout << "Computer Added" << endl;
+		temp = nullptr;
+		size++;
 
 	}
 
@@ -269,7 +244,7 @@ public:
 				}
 				for (int j = i; j < size - 1; j++)
 				{
-					temp[j+1] = computers[i+1];
+					temp[j + 1] = computers[i + 1];
 				}
 				size--;
 				delete computers;
@@ -290,8 +265,9 @@ public:
 };
 
 int main() {
+	Computer hp;
 	ComputerStore Kontakt;
-	Kontakt.AddComputer();
-	Kontakt.DeleteComputer(1);
+	cin >> hp;
+	Kontakt.AddComputer(hp);
 	Kontakt.PrintComputers();
 }
