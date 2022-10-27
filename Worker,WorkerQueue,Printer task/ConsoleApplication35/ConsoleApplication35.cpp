@@ -11,6 +11,7 @@ class Worker {
 	int age;
 
 public:
+
 	int pageCount;
 
 	static int Id;
@@ -69,7 +70,7 @@ public:
 		system("cls");
 		cout << "Name : " << obj.name
 			<< "\nSurname : " << obj.surname
-			<< "\nId : " << obj.Id
+			<< "\nId : " << obj.workerId
 			<< "\nAge : " << obj.age
 			<< "\nPagecount : " << obj.pageCount;
 		for (int i = 0; i < 4; i++)
@@ -115,7 +116,7 @@ public:
 
 	void Dequeue() {
 		assert(!IsEmpty() && "Queue is empty");
-		for (int i = 0; i < count; i++) {
+		for (int i = 0; i < count - 1; i++) {
 			arr[i] = arr[i + 1];
 		}
 		count--;
@@ -158,7 +159,7 @@ public:
 	}
 
 	void Start(){
-		for (int i = 0; i < queue.Count(); i++)
+		for (int i = 0; queue.Count() != 0 ;)
 		{
 			for (; queue[i].pageCount > 0; queue[i].pageCount--)
 			{
@@ -180,7 +181,5 @@ int main() {
 	sira.Enqueue(Ulvi);
 	Printer hp(sira);
 	hp.Start();
-	
-	
 
 }
