@@ -92,16 +92,16 @@ public:
 
     bool hasSpoiler;
 
-    Car(string model, string vendor, Engine engine, bool hasSpoiler) : Vehicle(vendor,model,engine) {
+    Car(string model, string vendor, Engine engine, bool hasSpoiler) : Vehicle(vendor, model, engine) {
         this->hasSpoiler = hasSpoiler;
     }
 
     void Show() override {
 
-        
+
         cout << "*********Car*********" << endl;
         Vehicle::Show();
-        cout << "Spoiler : " << (hasSpoiler ? "var" : "yox" ) << endl;
+        cout << "Spoiler : " << (hasSpoiler ? "var" : "yox") << endl;
 
     }
 };
@@ -150,7 +150,7 @@ public:
             << "Engine Count : " << engineCount << endl;
     }
 
-    
+
 };
 
 class VehicleDepo {
@@ -177,11 +177,7 @@ public:
 int main()
 {
 
-    Vehicle* Garage(new Car("Lada", "2107", Engine(2, "VAZ", 2.3), 1));
-    VehicleDepo depo;
-
-    depo.AddVehicle(Garage);
-    depo.ShowAllVehicle();
-
-
+    VehicleDepo* garrage = new VehicleDepo();
+    garrage->AddVehicle(new Car("lada", "vaz", Engine(2, "lada", 2.3), 1));
+    garrage->ShowAllVehicle();
 }
