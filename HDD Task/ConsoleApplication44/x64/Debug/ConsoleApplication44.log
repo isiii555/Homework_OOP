@@ -1,0 +1,5 @@
+﻿  Main.cpp
+C:\Users\user\source\repos\ConsoleApplication44\ConsoleApplication44\Disc.h(19,27): warning C4244: '=': conversion from 'unsigned __int64' to 'double', possible loss of data
+C:\Users\user\source\repos\ConsoleApplication44\ConsoleApplication44\SSD.h(20,27): warning C4244: '=': conversion from 'unsigned __int64' to 'double', possible loss of data
+C:\Users\user\source\repos\ConsoleApplication44\ConsoleApplication44\HDD.h(20,27): warning C4244: '=': conversion from 'unsigned __int64' to 'double', possible loss of data
+  ConsoleApplication44.vcxproj -> C:\Users\user\source\repos\ConsoleApplication44\x64\Debug\ConsoleApplication44.exe
