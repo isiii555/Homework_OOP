@@ -3,53 +3,9 @@
 
 class HDD : public Disc {
 
-	double current_size = 0;
-
-	class File {
-
-		double file_size;
-
-	public:
-
-		string filename;
-		string content;
-
-		File(string name, string cont = "") {
-			filename = name;
-			content = cont;
-			file_size = cont.length();
-		}
-
-		double getfile_size() {
-			return file_size;
-		}
-	};
-
-	vector<File> files;
-	int file_count = 0;
+	const static double max_size;
 
 public:
-
-	const static double max_size;
-	double write_speed = 0;
-
-	File& GetFile(string filename) {
-		for (int i = 0; i < files.size(); i++) {
-			if (filename == files[i].filename) {
-				return files[i];
-			}
-		}
-		throw FileNotFoundException("File tapilmadi", __LINE__, "GetFile");
-	}
-
-	bool IsExistsFile(string filename) {
-		for (int i = 0; i < files.size(); i++) {
-			if (filename == files[i].filename) {
-				return true;
-			}
-		}
-		return false;
-	}
 
 	void CreateFile(string filename, string content = "") override {
 		if (IsExistsFile(filename)) {
@@ -94,59 +50,6 @@ public:
 				}
 				cout << endl;
 				return;
-			}
-		}
-		throw FileNotFoundException("File tapilmadi", __LINE__, "GetFile");
-	}
-
-	void DeleteFileContent(string filename) {
-
-		for (int i = 0; i < files.size(); i++) {
-			if (filename == files[i].filename) {
-				current_size -= files[i].content.length();
-				files[i].content = "";
-				return;
-			}
-		}
-		throw FileNotFoundException("File tapilmadi", __LINE__, "GetFile");
-	}
-
-	double CurrentSize() {
-		return current_size;
-	}
-
-	void ShowAllFiles() {
-		for (int i = 0; i < files.size(); i++) {
-			cout << "File Name : " << files[i].filename << endl
-				<< "Content : " << files[i].content;
-		}
-	}
-
-	void DeleteByFileName(string filename) {
-		for (int i = 0; i < files.size(); i++) {
-			if (filename == files[i].filename) {
-				current_size -= files[i].content.length();
-				files.erase(files.begin() + i);
-				return;
-			}
-		}
-		throw FileNotFoundException("File tapilmadi", __LINE__, "GetFile");
-	}
-
-	void UpdateFilename(string oldfilename, string newfilename) {
-		for (int i = 0; i < files.size(); i++) {
-			if (oldfilename == files[i].filename) {
-				files[i].filename = newfilename;
-				return;
-			}
-		}
-		throw FileNotFoundException("File tapilmadi", __LINE__, "GetFile");
-	}
-
-	void hashFile(string filename) {
-		for (int i = 0; i < files.size(); i++) {
-			if (filename == files[i].filename) {
-				files[i].content.append("hash");
 			}
 		}
 		throw FileNotFoundException("File tapilmadi", __LINE__, "GetFile");
