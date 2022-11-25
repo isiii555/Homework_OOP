@@ -2,6 +2,7 @@
 #include "ClassExceptions.h"
 
 class Disc {
+protected:
 	double current_size = 0;
 
 	class File {
@@ -116,6 +117,7 @@ public:
 			cout << "File Name : " << files[i].filename << endl
 				<< "Content : " << files[i].content;
 		}
+		cout << endl;
 	}
 
 	virtual void DeleteByFileName(string filename) {
@@ -143,10 +145,12 @@ public:
 		for (int i = 0; i < files.size(); i++) {
 			if (filename == files[i].filename) {
 				files[i].content.append("hash");
+				return;
 			}
 		}
 		throw FileNotFoundException("File tapilmadi", __LINE__, "GetFile");
 	}
+	protected:
 
 	virtual ~Disc() = 0 {
 	}
