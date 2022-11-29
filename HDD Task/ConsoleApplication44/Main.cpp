@@ -19,16 +19,21 @@ public:
 
 void OperationSystem::controlPC() {
 	HDD hd;
+	SSD ssd;
 	try
 	{
 		hd.CreateFile("newtext.txt", "hello world");
+		hd.hashFile("newtext.txt");
+		hd.ShowAllFiles();
+		ssd.CreateFile("newtext.txt", "hello");
+		ssd.DeleteByFileName("newtext.txt");
+		ssd.ShowAllFiles();
 	}
 	catch (Exception& ex)
 	{
 		ex.Message();
 	}
-	cout << hd.CurrentSize() << endl;
-	hd.ShowAllFiles();
+
 
 }
 
