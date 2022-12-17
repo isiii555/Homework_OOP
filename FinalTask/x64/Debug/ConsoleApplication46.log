@@ -1,0 +1,16 @@
+﻿  ConsoleApplication46.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\filesystem(13): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
+C:\Users\user\source\repos\ConsoleApplication46\ConsoleApplication46\Ingredient.h(167,16): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\user\source\repos\ConsoleApplication46\ConsoleApplication46\Functions.h(249,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\user\source\repos\ConsoleApplication46\ConsoleApplication46\Functions.h(253,45): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\user\source\repos\ConsoleApplication46\ConsoleApplication46\Functions.h(268,12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\user\source\repos\ConsoleApplication46\ConsoleApplication46\Functions.h(272,43): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\user\source\repos\ConsoleApplication46\ConsoleApplication46\Functions.h(481,21): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\user\source\repos\ConsoleApplication46\ConsoleApplication46\Functions.h(510,5): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\user\source\repos\ConsoleApplication46\ConsoleApplication46\Functions.h(525,64): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\user\source\repos\ConsoleApplication46\ConsoleApplication46\Functions.h(525,46): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\user\source\repos\ConsoleApplication46\ConsoleApplication46\Functions.h(544,5): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\user\source\repos\ConsoleApplication46\ConsoleApplication46\Functions.h(498,3): warning C4102: 'labelpayment': unreferenced label
+C:\Users\user\source\repos\ConsoleApplication46\ConsoleApplication46\Functions.h(1103,15): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+C:\Users\user\source\repos\ConsoleApplication46\ConsoleApplication46\Functions.h(405): warning C4715: 'SignUp': not all control paths return a value
+  ConsoleApplication46.vcxproj -> C:\Users\user\source\repos\ConsoleApplication46\x64\Debug\ConsoleApplication46.exe
